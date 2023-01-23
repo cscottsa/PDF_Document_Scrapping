@@ -30,6 +30,8 @@ def convert_pdf2txt(src_dir, dest_dir):
         print(colored('Not found', 'red') + ' output folder "' + colored(output_folder, 'red') + '"')
         os.makedirs(dest_dir)
         print(colored('Created', 'green') + ' output folder "' + colored(output_folder, 'green') + '"')
+    else:
+        print(colored('Output folder "' + colored(output_folder, 'green') + '" detected'))
     # get list of pdf files in the source directory
     files = os.listdir(src_dir)
     files = [i for i in files if '.pdf' in i]
