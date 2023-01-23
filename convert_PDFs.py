@@ -7,6 +7,15 @@ from termcolor import colored
 
 output_folder = 'converted/'
 
+# function to create destination directory if it does not exist
+def check_dest_dir(dest_dir):
+    if not os.path.exists(dest_dir):
+        print(colored('Not found', 'red') + ' output folder "' + colored(output_folder, 'red') + '"')
+        os.makedirs(dest_dir)
+        print(colored('Created', 'green') + ' output folder "' + colored(output_folder, 'green') + '"')
+    else:
+        print(colored('Output folder "' + colored(output_folder, 'green') + '" detected'))
+
 # function to save the text content of a pdf to a txt file
 def save_file(filepath, content):
     with open(filepath, 'w', encoding='utf-8') as outfile:
@@ -26,12 +35,7 @@ def final_print(file_count, file_success_count, file_fail_count, file_failed_nam
 def convert_pdf2txt(src_dir, dest_dir):
     print('#################################\n# Starting .pdf to .txt conversion:')
     # create destination directory if it does not exist
-    if not os.path.exists(dest_dir):
-        print(colored('Not found', 'red') + ' output folder "' + colored(output_folder, 'red') + '"')
-        os.makedirs(dest_dir)
-        print(colored('Created', 'green') + ' output folder "' + colored(output_folder, 'green') + '"')
-    else:
-        print(colored('Output folder "' + colored(output_folder, 'green') + '" detected'))
+    check_dest_dir(dest_dir)
     # get list of pdf files in the source directory
     files = os.listdir(src_dir)
     files = [i for i in files if '.pdf' in i]
